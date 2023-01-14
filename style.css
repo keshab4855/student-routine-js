@@ -1,0 +1,28 @@
+#completed_tasks {
+  background: #3563a7;
+}
+#completed-heading {
+  background: #3563a7;
+  color: #fff;
+}
+
+.heading {
+  background: #3563a7;
+  color: #fff;
+  font-size: 0.5rem;
+}
+
+#add-btn {
+  color: #fff;
+  /* background-color: #c59402; */
+  background-color: #3563a7;
+}
+#clear-btn {
+  width: 5rem;
+  font-size: 0.8rem;
+}
+
+/* tr {
+  display: flex;
+  justify-content: space-between;
+} */
