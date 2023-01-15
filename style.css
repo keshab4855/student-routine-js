@@ -1,3 +1,7 @@
+body {
+  background: rgba(238, 121, 38, 0.625);
+}
+
 #completed_tasks {
   background: #3563a7;
 }
