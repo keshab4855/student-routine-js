@@ -2,7 +2,7 @@
 
 let entryList = [];
 let completedList = [];
-
+let totalHours = 24;
 ////////////////////form submit handler////////////////////
 const handleOnSubmit = (e) => {
   const formData = new FormData(e);
@@ -19,7 +19,8 @@ const handleOnSubmit = (e) => {
 const display = (taskArr) => {
   let str = "";
   taskArr.map((item, index) => {
-    str += `                <tr>
+    item.hours < totalHours
+      ? (str += `                <tr>
             <th >${index + 1}</th>
                         <td>${item.tasks}</td>
                         <td>${item.hours} hrs</td>
@@ -30,7 +31,8 @@ const display = (taskArr) => {
                             <button onclick ="allTaskDelete(${index})" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i></button>
                         </td>
                              </tr>  
-                        `;
+                        `)
+      : alert("You have exceed the daily hour limit");
   });
   document.getElementById("display-tasks").innerHTML = str;
 };
@@ -58,11 +60,11 @@ const displayCompleted = (arg) => {
             <th >${index + 1}</th>
                         <td>${item.tasks}</td>
                         <td>${item.hours} hrs</td>
-                        <td><button onclick = "switchToCompleted(${index})" class="btn btn-primary">
-                                <i class="bi bi-check-circle-fill"></i>
+                        <td><button onclick = "switchToPendingTask(${index})" class="btn btn-success">
+                                <i class="bi  bi-arrow-up-circle-fill"></i>
 
                             </button>
-                            <button onclick ="allTaskDelete(${index})" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i></button>
+                            <button onclick ="deleteCompletedList(${index})" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i></button>
                         </td>
                              </tr>  
                         `;
@@ -72,8 +74,25 @@ const displayCompleted = (arg) => {
 
 ////////////////////////Clearing all////////////////////////////////
 document.getElementById("clear-btn").addEventListener("click", () => {
-  console.log(entryList);
+  // console.log(entryList);
   entryList = [];
-  console.log(entryList);
+  completedList = [];
+
   display(entryList);
+  displayCompleted(completedList);
 });
+
+//////////////////////deleting the completed Tasks///////////////////
+const deleteCompletedList = (index) => {
+  const filteredArr = completedList.filter((item, i) => index !== i);
+  completedList = filteredArr;
+  displayCompleted(completedList);
+};
+
+///////////////////switching to pending tasks////////////////
+const switchToPendingTask = (index) => {
+  const switchingTask = completedList.splice(index, 1);
+  entryList.push(switchingTask[0]);
+  display(entryList);
+  displayCompleted(completedList);
+};
