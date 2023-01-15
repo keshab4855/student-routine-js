@@ -19,8 +19,7 @@ const handleOnSubmit = (e) => {
 const display = (taskArr) => {
   let str = "";
   taskArr.map((item, index) => {
-    item.hours < totalHours
-      ? (str += `                <tr>
+    str += `                <tr>
             <th >${index + 1}</th>
                         <td>${item.tasks}</td>
                         <td>${item.hours} hrs</td>
@@ -31,8 +30,7 @@ const display = (taskArr) => {
                             <button onclick ="allTaskDelete(${index})" class="btn btn-danger"> <i class="bi bi-trash3-fill"></i></button>
                         </td>
                              </tr>  
-                        `)
-      : alert("You have exceed the daily hour limit");
+                        `;
   });
   document.getElementById("display-tasks").innerHTML = str;
 };
